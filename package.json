@@ -1,12 +1,12 @@
 {
-  "name": "electron-quick-start",
+  "name": "my-first-electron-app",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "My First Electron application",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/lollykrown/first-electron",
   "keywords": [
     "Electron",
     "quick",
@@ -14,9 +14,6 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
-  "devDependencies": {
-    "electron": "^11.1.1"
-  }
+  "author": "Kayode Agboola",
+  "license": "CC0-1.0"
 }

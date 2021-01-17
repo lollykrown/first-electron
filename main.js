@@ -2,6 +2,12 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 
+const fs = require('fs')
+
+const root = fs.readdirSync('/users/agboola_kayode/Documents/Github/first-electron')
+
+console.log(root)
+
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
