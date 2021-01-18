@@ -17,22 +17,31 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadFile('src/index.html')  
 
-  // // or load url
-  // mainWindow.loadURL('https://lollykrown.xyz')
-
-  ipcMain.handle('dark-mode:toggle', () => {
-    if (nativeTheme.shouldUseDarkColors) {
-      nativeTheme.themeSource = 'light'
-    } else {
-      nativeTheme.themeSource = 'dark'
-    }
-    return nativeTheme.shouldUseDarkColors
+  const modalPath = path.join('file://', __dirname, 'src/add.html')
+  // Create the browser window.
+  const child = new BrowserWindow({
+    parent:mainWindow,
+    modal:true,
+    show:false,
+    width: 400,
+    height: 200,
+    // frame:false,
+    alwaysOnTop:true,
+    // transparent:true,
+    hasShadow: true,
   })
 
-  ipcMain.handle('dark-mode:system', () => {
-    nativeTheme.themeSouce = 'system'
-  })
+  ipcMain.handle('open', () => {
+  // and load the index.html of the app.
+  child.loadURL(modalPath)  
+  child.once('ready-to-show', () => {
+    child.show()
+    })
 
+  })
+  ipcMain.handle('close', () => {
+    child.close()
+  })
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools()

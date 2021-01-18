@@ -4,8 +4,8 @@
   "description": "My First Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ./main.js",
-    "dev": "electron --debug = 5858 ./main.js"
+    "start": "electron .",
+    "dev": " nodemon --watch . --exec \"electron . --debug\""
   },
   "repository": "https://github.com/lollykrown/first-electron",
   "keywords": [
@@ -16,5 +16,9 @@
     "demo"
   ],
   "author": "Kayode Agboola",
-  "license": "CC0-1.0"
+  "license": "CC0-1.0",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "nodemon": "^2.0.7"
+  }
 }
