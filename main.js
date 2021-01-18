@@ -1,31 +1,21 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, Notification, ipcMain, nativeTheme, dialog} = require('electron')
+const {app, BrowserWindow, Notification, ipcMain, nativeTheme, Menu, shell} = require('electron')
 const path = require('path')
-
-const fs = require('fs')
-// const root = fs.readdirSync('/users/agboola_kayode/Documents/Github/first-electron')
-// console.log(root)
-
 
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: path.join(__dirname, 'favicon.ico'),
-    // //remove frame
-    // frame:false,
+    icon: path.join(__dirname, 'assets/images/favicon.ico'),
     webPreferences: {
       nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js')
     }
   })
 
-  // open dialog
-  // console.log(dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }))
-
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')  
+  mainWindow.loadFile('src/index.html')  
 
   // // or load url
   // mainWindow.loadURL('https://lollykrown.xyz')
@@ -44,24 +34,35 @@ function createWindow () {
   })
 
 
-  // Event handler for asynchronous incoming messages
-ipcMain.on('asynchronous-message', (event, arg) => {
-  console.log(arg)
-
-  // Event emitter for sending asynchronous messages
-  event.sender.send('asynchronous-reply', 'async pong from main.js')
-})
-
-// Event handler for synchronous incoming messages
-ipcMain.on('synchronous-message', (event, arg) => {
-  console.log(arg) 
-
-  // Synchronous event emmision
-  event.returnValue = 'sync pong from main.js'
-})
-
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
+
+  const menu = Menu.buildFromTemplate([
+    {
+      label: 'Menu',
+      submenu: [
+        { 
+          label: 'Adjust Notification Value' },
+        { 
+          label: 'CoinMarketCap',
+          click() {
+            shell.openExternal('http://coinmarketcap.com')
+          }
+        },
+        { type: 'separator'},
+        { 
+          label: 'Exit', 
+          click() {
+            app.quit()
+          } 
+        }
+      ]
+    },
+    {
+      label: 'Info'
+    }
+  ])
+  Menu.setApplicationMenu(menu)
 }
 
 
@@ -92,13 +93,6 @@ app.whenReady().then(() => {
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-
-app.on('quit', function (event, exitCode) {
-  event.preventDefault()
-  console.log('ready to quit');
-  app.quit(exitCode)
-})
-
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit()
 })

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Lollykrown</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
+
+  </head>
+  <body>
+    <div class="row">
+      <div id="price-container">
+        <p class="subtext">Current BTC USD</p>
+        <h1 id="price">Loading...</h1>
+      </div>
+      <div id="goal-container">
+        <p><img src="../assets/images/up.svg"/><span id="targetPrice">Choose a target price</span></p>
+      </div>
+      <div id="right-container">
+        <button id="notifyBtn">Notify me when...</button>
+      </div>
+    </div>
+
+    <!-- You can also require other files to run in this process -->
+    <script src="index.js"></script>
+  </body>
+</html>

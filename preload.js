@@ -12,15 +12,4 @@ window.addEventListener('DOMContentLoaded', () => {
     replaceText(`${type}-version`, process.versions[type])
   }
 
-
-  const userInfo = `User Info: ${JSON.stringify(os.userInfo())}  <br>
-  Platform: ${os.platform()}<br>
-  User home directory: ${os.homedir()} <br> 
-  OS Architecture:  ${os.arch()}  <br>`;
-
-  console.log(os.userInfo().username)
-
-  const doc = document.getElementById('os')
-
-  doc.innerHTML = userInfo
 })
